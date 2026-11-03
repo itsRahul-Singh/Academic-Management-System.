@@ -14,7 +14,8 @@ public class StudentService {
 		this.studentRepository = studentRepository;
 	}
 	
-public void createStudent(StudentEntity studentEntity) {
-	studentRepository.createStudent(studentEntity);
-}
+public StudentEntity createStudent(StudentEntity studentEntity) {
+	StudentEntity studentResp = studentRepository.save(studentEntity);
+	return studentResp; 
+			}
 }
