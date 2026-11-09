@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,5 +40,15 @@ public class StudentController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		return ResponseEntity.ok(studentResponse);
+	}
+	
+	@GetMapping("/getAll")
+	public ResponseEntity<List<StudentEntity>> getAllStudent(){
+		List<StudentEntity> studentList =studentService.retriveAllStudent();
+		
+		if(studentList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		return ResponseEntity.ok(studentList);
 	}
 }

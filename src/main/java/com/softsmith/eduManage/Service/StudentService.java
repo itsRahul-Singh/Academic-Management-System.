@@ -1,9 +1,9 @@
 package com.softsmith.eduManage.Service;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 import Entity.StudentEntity;
 import Repository.StudentRepository;
 
@@ -27,5 +27,10 @@ public StudentEntity retriveStudent(Long id) {
 		 return studentResponse.get();
 	 }
 	return null;
+}
+
+public List<StudentEntity> retriveAllStudent() {
+  List<StudentEntity>studentList= studentRepository.findAll();
+	return studentList;
 }
 }
