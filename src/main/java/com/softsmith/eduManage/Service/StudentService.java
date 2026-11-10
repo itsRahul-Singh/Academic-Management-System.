@@ -33,4 +33,31 @@ public List<StudentEntity> retriveAllStudent() {
   List<StudentEntity>studentList= studentRepository.findAll();
 	return studentList;
 }
+
+public StudentEntity updateStudent(Long id, StudentEntity studentReq) {
+	Optional<StudentEntity> existingStudent = studentRepository.findById(id);
+	
+	if(existingStudent.isEmpty()) {
+		return null;
+	}
+	
+	StudentEntity studentToUpdate = existingStudent.get();
+	studentToUpdate.setName(studentReq.getName());
+	studentToUpdate.setRollNo(studentReq.getRollNo());
+	studentToUpdate.setAge(studentReq.getAge());
+	studentToUpdate.setEmail(studentReq.getEmail());
+	studentToUpdate.setCourse(studentReq.getCourse());
+	
+	return studentRepository.save(studentToUpdate);
+}
+
+public Boolean deleteStudent(Long id) {
+	Boolean isExists = studentRepository.existsById(id);
+	
+	if(!isExists) return false;
+	
+	studentRepository.deleteById(id);
+	return true;
+}
+
 }
