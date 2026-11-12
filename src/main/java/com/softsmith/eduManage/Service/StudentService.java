@@ -60,4 +60,19 @@ public Boolean deleteStudent(Long id) {
 	return true;
 }
 
+public Boolean deleteStudentSoftly(Long id) {
+	Optional<StudentEntity> existingStudent =studentRepository.findByIdAndDeletedIsFalse(id);
+	
+	if(existingStudent.isEmpty()) {
+		return false;
+	}
+	
+	StudentEntity studentToSet = existingStudent.get();
+	studentToSet.setDeleted(true);
+	studentRepository.save(studentToSet);
+	
+	return true;
+	
+}
+
 }
