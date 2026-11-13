@@ -16,13 +16,14 @@ public class StudentService {
 		this.studentRepository = studentRepository;
 	}
 	
-public StudentEntity createStudent(StudentEntity studentEntity) {
-	StudentEntity studentResp = studentRepository.save(studentEntity);
-	return studentResp; 
+public StudentEntity createStudent(StudentEntity studentRequest) {
+	studentRequest.setDeleted(false);
+	StudentEntity studentResponse = studentRepository.save(studentRequest);
+	return studentResponse; 
 			}
 
 public StudentEntity retriveStudent(Long id) {
-	 Optional<StudentEntity> studentResponse =studentRepository.findById(id);
+	 Optional<StudentEntity> studentResponse =studentRepository.findByIdAndDeletedIsFalse(id);
 	 if(studentResponse.isPresent()) {
 		 return studentResponse.get();
 	 }
@@ -30,12 +31,12 @@ public StudentEntity retriveStudent(Long id) {
 }
 
 public List<StudentEntity> retriveAllStudent() {
-  List<StudentEntity>studentList= studentRepository.findAll();
+  List<StudentEntity> studentList= studentRepository.findByDeletedIsFalse();
 	return studentList;
 }
 
 public StudentEntity updateStudent(Long id, StudentEntity studentReq) {
-	Optional<StudentEntity> existingStudent = studentRepository.findById(id);
+	Optional<StudentEntity> existingStudent = studentRepository.findByIdAndDeletedIsFalse(id);
 	
 	if(existingStudent.isEmpty()) {
 		return null;

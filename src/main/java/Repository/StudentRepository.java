@@ -1,5 +1,6 @@
 package Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,6 @@ import Entity.StudentEntity;
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
 	
 	Optional<StudentEntity> findByIdAndDeletedIsFalse(Long id);
+	List<StudentEntity> findByDeletedIsFalse();
 
 }
