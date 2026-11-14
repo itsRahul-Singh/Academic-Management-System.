@@ -4,6 +4,10 @@ import java.util.Optional;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.softsmith.eduManage.DTO.StudentRequestDto;
+import com.softsmith.eduManage.DTO.StudentResponseDto;
+
 import Entity.StudentEntity;
 import Repository.StudentRepository;
 
@@ -16,10 +20,13 @@ public class StudentService {
 		this.studentRepository = studentRepository;
 	}
 	
-public StudentEntity createStudent(StudentEntity studentRequest) {
-	studentRequest.setDeleted(false);
-	StudentEntity studentResponse = studentRepository.save(studentRequest);
-	return studentResponse; 
+public StudentResponseDto createStudent(StudentRequestDto studentRequestDto) {
+	StudentEntity studentEntity = mapToEntity(studentRequestDto);
+	
+	
+	StudentEntity studentResponse = studentRepository.save(studentEntity);
+	
+	return mapToDto(studentResponse);
 			}
 
 public StudentEntity retriveStudent(Long id) {
@@ -75,5 +82,31 @@ public Boolean deleteStudentSoftly(Long id) {
 	return true;
 	
 }
+
+private StudentEntity mapToEntity(StudentRequestDto studentRequestDto) {
+	StudentEntity studentEntity = new StudentEntity();
+	studentEntity.setName(studentRequestDto.getName());
+	studentEntity.setAge(studentRequestDto.getAge());
+	studentEntity.setEmail(studentRequestDto.getEmail());
+	studentEntity.setRollNo(studentRequestDto.getRollNo());
+	studentEntity.setCourse(studentRequestDto.getCourse());
+	
+	studentEntity.setDeleted(false);
+	return studentEntity;
+}
+
+private StudentResponseDto mapToDto(StudentEntity studentEntity) {
+	StudentResponseDto studentResponseDto = new StudentResponseDto();
+	studentResponseDto.setName(studentEntity.getName());
+	studentResponseDto.setAge(studentEntity.getAge());
+	studentResponseDto.setEmail(studentEntity.getEmail());
+	studentResponseDto.setRollNo(studentEntity.getRollNo());
+	studentResponseDto.setCourse(studentEntity.getCourse());
+	studentResponseDto.setId(studentEntity.getId());
+	studentResponseDto.setMessage("Student Created Successfully");
+	
+	return studentResponseDto;
+}
+
 
 }

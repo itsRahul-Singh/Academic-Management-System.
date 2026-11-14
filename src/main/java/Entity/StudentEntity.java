@@ -1,17 +1,21 @@
 package Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class StudentEntity {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private int age;
 	private long rollNo;
 	private String email;
 	private Boolean deleted;
+	private String course;
 	public Boolean getDeleted() {
 		return deleted;
 	}
@@ -54,6 +58,6 @@ public class StudentEntity {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-	private String course;
+	
 
 }

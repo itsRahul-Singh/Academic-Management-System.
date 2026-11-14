@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.softsmith.eduManage.DTO.StudentRequestDto;
+import com.softsmith.eduManage.DTO.StudentResponseDto;
 import com.softsmith.eduManage.Service.StudentService;
 
 import Entity.StudentEntity;
@@ -28,11 +30,11 @@ public class StudentController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<StudentEntity> createStudent(@RequestBody StudentEntity studentEntity) {
-		StudentEntity savedResponse = (StudentEntity) studentService.createStudent(studentEntity);
+	public ResponseEntity<StudentResponseDto> createStudent(@RequestBody StudentRequestDto studentRequestDto) {
+		StudentResponseDto createdStudent = studentService.createStudent(studentRequestDto);
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.body(savedResponse);
+				.body(createdStudent);
 	}
 	
 	@GetMapping("/get/{id}")
