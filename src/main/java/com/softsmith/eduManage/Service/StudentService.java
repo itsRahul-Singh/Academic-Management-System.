@@ -1,6 +1,7 @@
 package com.softsmith.eduManage.Service;
 
 import java.util.Optional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class StudentService {
 public StudentResponseDto createStudent(StudentRequestDto studentRequestDto) {
 	StudentEntity studentEntity = mapToEntity(studentRequestDto);
 	
+	studentEntity.setCreatedAt(LocalDateTime.now());
+	studentEntity.setUpdatedAt(LocalDateTime.now());
 	
 	StudentEntity studentResponse = studentRepository.save(studentEntity);
 	
@@ -104,6 +107,8 @@ private StudentResponseDto mapToDto(StudentEntity studentEntity) {
 	studentResponseDto.setCourse(studentEntity.getCourse());
 	studentResponseDto.setId(studentEntity.getId());
 	studentResponseDto.setMessage("Student Created Successfully");
+	studentResponseDto.setCreatedAt(studentEntity.getCreatedAt());
+	studentResponseDto.setUpdatedAt(studentEntity.getUpdatedAt());
 	
 	return studentResponseDto;
 }

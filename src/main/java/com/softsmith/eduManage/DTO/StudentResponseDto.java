@@ -1,5 +1,7 @@
 package com.softsmith.eduManage.DTO;
 
+import java.time.LocalDateTime;
+
 public class StudentResponseDto {
 	private int id;
 	private String name;
@@ -8,8 +10,22 @@ public class StudentResponseDto {
 	private String email;
 	private String course;
 	private String message;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 	
 	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(LocalDateTime createAt) {
+		this.createdAt = createAt;
+	}
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	public int getId() {
 		return id;
 	}

@@ -1,5 +1,7 @@
 package Entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,8 +18,23 @@ public class StudentEntity {
 	private String email;
 	private Boolean deleted;
 	private String course;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
+	
 	public Boolean getDeleted() {
 		return deleted;
+	}
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
