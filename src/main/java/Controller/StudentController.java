@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.softsmith.eduManage.DTO.StudentRequestDto;
 import com.softsmith.eduManage.DTO.StudentResponseDto;
+import com.softsmith.eduManage.DTO.UpdateStudentRequestDto;
+import com.softsmith.eduManage.DTO.UpdateStudentResponseDto;
 import com.softsmith.eduManage.Service.StudentService;
 
 import Entity.StudentEntity;
@@ -38,8 +40,8 @@ public class StudentController {
 	}
 	
 	@GetMapping("/get/{id}")
-	public ResponseEntity<StudentEntity> getStudent(@PathVariable Long id){
-		StudentEntity studentResponse =studentService.retriveStudent(id);
+	public ResponseEntity<StudentResponseDto> getStudent(@PathVariable Long id){
+		StudentResponseDto studentResponse =studentService.retriveStudent(id);
 		
 		if(studentResponse == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -58,8 +60,8 @@ public class StudentController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<StudentEntity> updateStudent(@PathVariable Long id, @RequestBody StudentEntity studentReq){
-		StudentEntity updatedStudent = studentService.updateStudent(id,studentReq);
+	public ResponseEntity<UpdateStudentResponseDto> updateStudent(@PathVariable Long id, @RequestBody UpdateStudentRequestDto studentReq){
+		UpdateStudentResponseDto updatedStudent = studentService.updateStudent(id,studentReq);
 		
 		if(updatedStudent == null) {
 			return ResponseEntity.notFound().build();
