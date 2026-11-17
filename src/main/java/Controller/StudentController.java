@@ -21,6 +21,7 @@ import com.softsmith.eduManage.DTO.UpdateStudentResponseDto;
 import com.softsmith.eduManage.Service.StudentService;
 
 import Entity.StudentEntity;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/students")
@@ -32,7 +33,8 @@ public class StudentController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<StudentResponseDto> createStudent(@RequestBody StudentRequestDto studentRequestDto) {
+	public ResponseEntity<StudentResponseDto> createStudent(
+			@Valid @RequestBody StudentRequestDto studentRequestDto) {
 		StudentResponseDto createdStudent = studentService.createStudent(studentRequestDto);
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
