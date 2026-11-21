@@ -40,10 +40,11 @@ public StudentResponseDto createStudent(StudentRequestDto studentRequestDto) {
 
 public StudentResponseDto retriveStudent(Long id) {
 	 Optional<StudentEntity> studentResponse =studentRepository.findByIdAndDeletedIsFalse(id);
-	 if(studentResponse.isPresent()) {
-		 return mapToDto(studentResponse.get());
-	 }
-	return null;
+//	 if(studentResponse.isPresent()) {
+//		 return mapToDto(studentResponse.get());
+//	 }
+//	return null;
+	 return mapToDto(studentResponse.get());
 }
 
 
